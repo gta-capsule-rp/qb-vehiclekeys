@@ -59,6 +59,28 @@ AddEventHandler('vehiclekeys:client:ToggleEngine', function()
     end
 end)
 
+RegisterKeyMapping('engineOn', 'Turn Engine On', 'MOUSE_WHEEL', 'IOM_WHEEL_UP')
+RegisterCommand('engineOn', function()
+    local EngineOn = IsVehicleEngineOn(GetVehiclePedIsIn(PlayerPedId()))
+    local veh = GetVehiclePedIsIn(PlayerPedId(), true)
+    if HasKey then
+        if EngineOn then
+            SetVehicleEngineOn(veh, true, false, true)
+        end
+    end
+end)
+
+RegisterKeyMapping('engineOff', 'Turn Engine Off', 'MOUSE_WHEEL', 'IOM_WHEEL_DOWN')
+RegisterCommand('engineOff', function()
+    local EngineOn = IsVehicleEngineOn(GetVehiclePedIsIn(PlayerPedId()))
+    local veh = GetVehiclePedIsIn(PlayerPedId(), true)
+    if HasKey then
+        if not EngineOn then
+            SetVehicleEngineOn(veh, false, false, true)
+        end
+    end
+end)
+
 -- This event is to prevent you from having to /logout after restarting the vehiclekeys, will only trigger when the resource gets restarted manually or by the server, not client-side, client-side has it's own event: onClientResourceStart
 
 AddEventHandler('onResourceStart', function(resource)
