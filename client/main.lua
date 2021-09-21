@@ -63,10 +63,8 @@ RegisterKeyMapping('engineOn', 'Turn Engine On', 'MOUSE_WHEEL', 'IOM_WHEEL_UP')
 RegisterCommand('engineOn', function()
     local EngineOn = IsVehicleEngineOn(GetVehiclePedIsIn(PlayerPedId()))
     local veh = GetVehiclePedIsIn(PlayerPedId(), true)
-    if HasKey then
-        if EngineOn then
-            SetVehicleEngineOn(veh, true, false, true)
-        end
+    if HasKey and not EngineOn then
+        SetVehicleEngineOn(veh, true, false, true)
     end
 end)
 
@@ -74,10 +72,8 @@ RegisterKeyMapping('engineOff', 'Turn Engine Off', 'MOUSE_WHEEL', 'IOM_WHEEL_DOW
 RegisterCommand('engineOff', function()
     local EngineOn = IsVehicleEngineOn(GetVehiclePedIsIn(PlayerPedId()))
     local veh = GetVehiclePedIsIn(PlayerPedId(), true)
-    if HasKey then
-        if not EngineOn then
-            SetVehicleEngineOn(veh, false, false, true)
-        end
+    if HasKey and EngineOn then
+        SetVehicleEngineOn(veh, false, false, true)
     end
 end)
 
